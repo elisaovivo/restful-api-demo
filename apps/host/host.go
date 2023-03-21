@@ -1,6 +1,14 @@
 package host
 
-import "context"
+import (
+	"context"
+	"github.com/go-playground/validator/v10"
+	"time"
+)
+
+var (
+	validate = validator.New()
+)
 
 // host app service接口定义
 type Service interface {
@@ -33,6 +41,17 @@ type Host struct {
 	*Resource
 	*Describe
 }
+
+func (h *Host) Validate() error {
+	return validate.Struct(h)
+}
+
+func (h *Host) InjectDefault() {
+	if h.CreateAt == 0 {
+		h.CreateAt = time.Now().UnixMilli()
+	}
+}
+
 type Vendor int
 
 const (
