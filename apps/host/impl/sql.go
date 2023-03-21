@@ -30,6 +30,4 @@ const (
 	VALUES
 		( ?,?,?,?,?,?,?,? );
 	`
-
-	queryHostSQL = `SELECT * FROM resource as r LEFT JOIN host h ON r.id=h.resource_id`
 )

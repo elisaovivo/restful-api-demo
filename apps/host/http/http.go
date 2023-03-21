@@ -11,14 +11,14 @@ func NewHostHTTPHandler(svc host.Service) *Handler {
 	}
 }
 
-// 写一个实体，把内部的接口通过http协议暴露出去
-// 依赖内部接口的实现
-// 该实体，会实现Gin的Http Handler
+// 通过写一个实例类, 把内部的接口通过HTTP协议暴露出去
+// 所以需要依赖内部接口的实现
+// 该实体类, 会实现Gin的Http Handler
 type Handler struct {
 	svc host.Service
 }
 
-// http handler注册
+// 完成了 Http Handler的注册
 func (h *Handler) Registry(r gin.IRouter) {
 	r.POST("/hosts", h.createHost)
 }

@@ -1,7 +1,6 @@
 package host
 
 import (
-	"context"
 	"github.com/go-playground/validator/v10"
 	"time"
 )
@@ -10,24 +9,9 @@ var (
 	validate = validator.New()
 )
 
-// host app service接口定义
-type Service interface {
-	CreateHost(context.Context, *Host) (*Host, error)
-	QueryHost(context.Context, *QueryHostRequest) (*HostSet, error)
-	UpdateHost(ctx context.Context, request *QueryHostRequest) (*Host, error)
-	DescribeHost(ctx context.Context, request *QueryHostRequest) (*Host, error)
-	DeleteHost(context.Context, *DeleteHostRequest) (*Host, error)
-}
-type QueryHostRequest struct {
-	PageSize   uint64 `json:"page_size,omitempty"`
-	PageNumber uint64 `json:"page_number,omitempty"`
-}
 type HostSet struct {
 	Items []*Host `json:"items"`
 	Total int     `json:"total"`
-}
-type DeleteHostRequest struct {
-	Id string
 }
 
 func NewHost() *Host {
@@ -85,4 +69,14 @@ type Describe struct {
 	OSType       string `json:"os_type"`                    // 操作系统类型，分为Windows和Linux
 	OSName       string `json:"os_name"`                    // 操作系统名称
 	SerialNumber string `json:"serial_number"`              // 序列号
+}
+type QueryHostRequest struct {
+}
+
+type UpdateHostRequest struct {
+	*Describe
+}
+
+type DeleteHostRequest struct {
+	Id string
 }
