@@ -1,9 +1,17 @@
 package conf
 
-import "sync"
+import (
+	"context"
+	"database/sql"
+	"fmt"
+	"sync"
+	"time"
+)
 
 // 全局对象，在配置加载时加载
 var config *Config
+
+var db *sql.DB
 
 func C() *Config {
 	if config == nil {
@@ -67,6 +75,44 @@ func NewDefaultMySQL() *MySQL {
 		MaxLifeTime: 60 * 60,
 		MaxIdleTime: 60 * 60,
 	}
+}
+
+// GetDB todo
+func (m *MySQL) GetDB() (*sql.DB, error) {
+	// 加载全局数据量单例
+	m.lock.Lock()
+	defer m.lock.Unlock()
+	if db == nil {
+		conn, err := m.getDBConn()
+		if err != nil {
+			return nil, err
+		}
+		db = conn
+	}
+	return db, nil
+}
+
+// 连接池:driverConn具体的连接对象，他维护着一个socket
+// pool []*driverConn,维护pool里面的连接都是可用的，定期检查我们的conn健康状况
+// 某一个driverConn已经失效，driverConn.Reset()，清空结构体数据，Reconn获取一个连接，让该conn借壳存活
+// 避免结构体内存申请的开销成本
+func (m *MySQL) getDBConn() (*sql.DB, error) {
+	var err error
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&multiStatements=true", m.UserName, m.Password, m.Host, m.Port, m.Database)
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		return nil, fmt.Errorf("connect to mysql<%s> error, %s", dsn, err.Error())
+	}
+	db.SetMaxOpenConns(m.MaxOpenConn)
+	db.SetMaxIdleConns(m.MaxIdleConn)
+	db.SetConnMaxLifetime(time.Second * time.Duration(m.MaxLifeTime))
+	db.SetConnMaxIdleTime(time.Second * time.Duration(m.MaxIdleTime))
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := db.PingContext(ctx); err != nil {
+		return nil, fmt.Errorf("ping mysql<%s> error, %s", dsn, err.Error())
+	}
+	return db, nil
 }
 
 // MySQL todo
