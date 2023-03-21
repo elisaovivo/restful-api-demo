@@ -15,9 +15,14 @@ var (
 
 func TestCreate(t *testing.T) {
 	should := assert.New(t)
-
 	ins := host.NewHost()
+
 	ins.Name = "test"
+	ins.Id = "ins-01"
+	ins.Region = "杭州"
+	ins.Type = "sm1"
+	ins.CPU = 1
+	ins.Memory = 2048
 	ins, err := service.CreateHost(context.Background(), ins)
 	if should.NoError(err) {
 		fmt.Println(ins)

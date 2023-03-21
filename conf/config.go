@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"sync"
 	"time"
 )
@@ -67,9 +68,9 @@ func NewDefaultMySQL() *MySQL {
 	return &MySQL{
 		Host:        "127.0.0.1",
 		Port:        "3306",
-		UserName:    "demo",
-		Password:    "12345",
-		Database:    "demo",
+		UserName:    "root",
+		Password:    "123456",
+		Database:    "test",
 		MaxOpenConn: 10,
 		MaxIdleConn: 5,
 		MaxLifeTime: 60 * 60,
@@ -78,18 +79,18 @@ func NewDefaultMySQL() *MySQL {
 }
 
 // GetDB todo
-func (m *MySQL) GetDB() (*sql.DB, error) {
+func (m *MySQL) GetDB() *sql.DB {
 	// 加载全局数据量单例
 	m.lock.Lock()
 	defer m.lock.Unlock()
 	if db == nil {
 		conn, err := m.getDBConn()
 		if err != nil {
-			return nil, err
+			return nil
 		}
 		db = conn
 	}
-	return db, nil
+	return db
 }
 
 // 连接池:driverConn具体的连接对象，他维护着一个socket

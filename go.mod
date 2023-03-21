@@ -6,6 +6,7 @@ require (
 	github.com/BurntSushi/toml v1.2.1
 	github.com/caarlos0/env/v6 v6.10.1
 	github.com/go-playground/validator/v10 v10.12.0
+	github.com/go-sql-driver/mysql v1.7.0
 	github.com/stretchr/testify v1.8.2
 )
 
