@@ -2,29 +2,71 @@ package conf
 
 import "sync"
 
+// 全局对象，在配置加载时加载
+var config *Config
+
+func C() *Config {
+	if config == nil {
+		panic("load config first")
+	}
+	return config
+}
+func NewDefaultConfig() *Config {
+	return &Config{
+		App:   NewDefualtApp(),
+		Log:   NewDefaultLog(),
+		MySQL: NewDefaultMySQL(),
+	}
+}
+
 // Config 应用配置
 type Config struct {
-	App   *app   `toml:"app"`
+	App   *App   `toml:"app"`
 	Log   *Log   `toml:"log"`
 	MySQL *MySQL `toml:"mysql"`
 }
 
-type app struct {
-	Name      string `toml:"name" env:"APP_NAME"`
-	Host      string `toml:"host" env:"APP_HOST"`
-	Port      string `toml:"port" env:"APP_PORT"`
-	Key       string `toml:"key" env:"APP_KEY"`
-	EnableSSL bool   `toml:"enable_ssl" env:"APP_ENABLE_SSL"`
-	CertFile  string `toml:"cert_file" env:"APP_CERT_FILE"`
-	KeyFile   string `toml:"key_file" env:"APP_KEY_FILE"`
+func NewDefualtApp() *App {
+	return &App{
+		Name: "demo",
+		Host: "127.0.0,1",
+		Port: "8050",
+	}
+}
+
+type App struct {
+	Name string `toml:"name" env:"APP_NAME"`
+	Host string `toml:"host" env:"APP_HOST"`
+	Port string `toml:"port" env:"APP_PORT"`
+}
+
+func NewDefaultLog() *Log {
+	return &Log{
+		Level:  "info",
+		Format: TextFormat,
+		To:     ToStdout,
+	}
 }
 
 // Log todo
 type Log struct {
-	Level   string    `toml:"level" env:"LOG_LEVEL"`
-	PathDir string    `toml:"path_dir" env:"LOG_PATH_DIR"`
-	Format  LogFormat `toml:"format" env:"LOG_FORMAT"`
-	To      LogTo     `toml:"to" env:"LOG_TO"`
+	Level  string    `toml:"level" env:"LOG_LEVEL"`
+	Format LogFormat `toml:"format" env:"LOG_FORMAT"`
+	To     LogTo     `toml:"to" env:"LOG_TO"`
+}
+
+func NewDefaultMySQL() *MySQL {
+	return &MySQL{
+		Host:        "127.0.0.1",
+		Port:        "3306",
+		UserName:    "demo",
+		Password:    "12345",
+		Database:    "demo",
+		MaxOpenConn: 10,
+		MaxIdleConn: 5,
+		MaxLifeTime: 60 * 60,
+		MaxIdleTime: 60 * 60,
+	}
 }
 
 // MySQL todo
