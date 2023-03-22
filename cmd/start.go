@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/elisaovivo/restful-api-demo/apps"
 	"github.com/elisaovivo/restful-api-demo/apps/host/http"
-	"github.com/elisaovivo/restful-api-demo/apps/host/impl"
+	_ "github.com/elisaovivo/restful-api-demo/apps/host/impl"
 	"github.com/elisaovivo/restful-api-demo/conf"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
@@ -30,10 +30,8 @@ var StartCmd = &cobra.Command{
 			panic(err)
 		}
 
-		// 加载我们Host Service的实体类
-		// host service 的具体实现
-		//service := impl.NewHostServiceImpl()
-		apps.HostService = impl.NewHostServiceImpl()
+		apps.Init()
+
 		// 通过Host API Handler提供 HTTP RestFul接口
 		api := http.NewHostHTTPHandler()
 		api.Config()
