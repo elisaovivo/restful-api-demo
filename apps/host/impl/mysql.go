@@ -51,5 +51,5 @@ func (i *HostServiceImpl) Name() string {
 // _ import app 自动执行注册逻辑
 func init() {
 	//  对象注册到ioc层
-	apps.Registry(impl)
+	apps.RegistryImpl(impl)
 }

@@ -2,8 +2,7 @@ package cmd
 
 import (
 	"github.com/elisaovivo/restful-api-demo/apps"
-	"github.com/elisaovivo/restful-api-demo/apps/host/http"
-	_ "github.com/elisaovivo/restful-api-demo/apps/host/impl"
+	_ "github.com/elisaovivo/restful-api-demo/apps/all"
 	"github.com/elisaovivo/restful-api-demo/conf"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
@@ -30,14 +29,10 @@ var StartCmd = &cobra.Command{
 			panic(err)
 		}
 
-		apps.Init()
+		apps.InitImpl()
 
-		// 通过Host API Handler提供 HTTP RestFul接口
-		api := http.NewHostHTTPHandler()
-		api.Config()
-		// 提供一个Gin Router
 		g := gin.Default()
-		api.Registry(g)
+		apps.InitGin(g)
 
 		return g.Run(conf.C().App.HttpAddr())
 	},
