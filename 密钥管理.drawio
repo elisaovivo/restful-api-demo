@@ -1,9 +1,54 @@
-<mxfile host="app.diagrams.net" modified="2023-08-16T03:44:25.294Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" version="21.6.8" etag="hK180bc9Ep857i8axtne" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-16T03:50:25.191Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="6olMwbNshwtR3cvovhMy" version="21.6.8" type="github">
   <diagram name="第 1 页" id="XGe6FO7zCrGAMsrieaSj">
-    <mxGraphModel>
+    <mxGraphModel dx="714" dy="679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="DrZler4jUFO0N7JAHadi-7" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DrZler4jUFO0N7JAHadi-1" target="DrZler4jUFO0N7JAHadi-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-1" value="用户" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="305" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-2" value="密钥管理" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="300" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-3" value="删除密钥" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="440" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-4" value="查询密钥" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="370" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-5" value="新增密钥" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="240" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-6" value="刷新密钥" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-8" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;entryX=0.314;entryY=0.943;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="DrZler4jUFO0N7JAHadi-2" target="DrZler4jUFO0N7JAHadi-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="350" as="sourcePoint" />
+            <mxPoint x="330" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-9" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;entryX=0.007;entryY=0.6;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="DrZler4jUFO0N7JAHadi-2" target="DrZler4jUFO0N7JAHadi-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="310" as="sourcePoint" />
+            <mxPoint x="354" y="236" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-10" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;exitX=0.979;exitY=0.629;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="DrZler4jUFO0N7JAHadi-2" target="DrZler4jUFO0N7JAHadi-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="320" as="sourcePoint" />
+            <mxPoint x="430" y="344" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DrZler4jUFO0N7JAHadi-11" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;entryX=0.307;entryY=-0.043;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="DrZler4jUFO0N7JAHadi-2" target="DrZler4jUFO0N7JAHadi-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="330" as="sourcePoint" />
+            <mxPoint x="374" y="256" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
